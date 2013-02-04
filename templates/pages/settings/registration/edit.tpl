@@ -29,7 +29,7 @@ The following errors were encountered in your submission:
 	<label for="edit[paypal_live_email]">Live account primary email address</label>
 	<input id="edit[paypal_live_email]" name="edit[paypal_live_email]" maxlength="100" size="50" value="" type="text" /><div class="description">Email address of Paypal account handling payments</div>
 
-	<label for="edit[paypal_live_pdt]">Sandbox PDT Identity Token</label>
+	<label for="edit[paypal_live_pdt]">Live Account PDT Identity Token</label>
 	<input id="edit[paypal_live_pdt]" name="edit[paypal_live_pdt]" maxlength="100" size="50" value="" type="text" /><div class="description">Identity Token PayPal uses to return information regarding the transaction</div>
 
 	<label for="edit[paypal_live_url]">Live URL</label>
