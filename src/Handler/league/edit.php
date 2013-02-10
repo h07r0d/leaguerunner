@@ -1,4 +1,4 @@
-<?php
+	<?php
 require_once('Handler/LeagueHandler.php');
 class league_edit extends LeagueHandler
 {
@@ -20,10 +20,11 @@ class league_edit extends LeagueHandler
 		$this->template_name = 'pages/league/edit.tpl';
 
 		// If Registrations are enabled, assign required events to the league
+		// Select events in the matching season
 		if(variable_get('registration','')) {
 			$this->smarty->assign('allevents', getOptionsFromQuery(
 				"SELECT registration_id AS theKey, name AS theValue FROM registration_events e ".
-				"WHERE e.open < DATE_ADD(NOW(), INTERVAL 1 WEEK) AND e.close > NOW()")
+				"WHERE e.close > NOW() AND season_id = ?", array($this->league->season))
 			);
 		}
 
