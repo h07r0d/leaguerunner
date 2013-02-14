@@ -17,7 +17,7 @@ The following errors were encountered in your submission:
 	<label for="edit[paypal_url]">Payment Processing</label>
 	{html_radios name="edit[paypal_url]" options=$live_sandbox labels=FALSE}<div class="description">Using live for real payments or Sandbox for testing?</div>
 
-	<labe3 for="edit[paypal_sandbox_email]">Sandbox account email address</label>
+	<label for="edit[paypal_sandbox_email]">Sandbox account email address</label>
 	<input id="edit[paypal_sandbox_email]" name="edit[paypal_sandbox_email]" maxlength="100" size="50" value="" type="text" /><div class="description">Email address of Sandbox account</div>
 
 	<label for="edit[paypal_sandbox_pdt]">Sandbox PDT Identity Token</label>
