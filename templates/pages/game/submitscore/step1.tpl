@@ -31,7 +31,6 @@ If your opponent has already entered a score, it will be displayed below.  If th
         form.elements['edit[defaulted]'][1].disabled = false;
     }
   }
-// -->
 {/literal}
 </script>
 <form id="score_form" method="post">
@@ -57,6 +56,7 @@ If your opponent has already entered a score, it will be displayed below.  If th
     <td>{$opponent_entry->score_for|default:"not yet entered" }{if $opponent_entry->defaulted == "us"} (defaulted){/if}</td>
   </tr>
 </table>
+</div>
 <p>
   <input type="submit" name="submit" value="Next Step" />
   <input type="reset" name="reset" value="reset" />
