@@ -139,9 +139,6 @@ function leaguerunner_form_alter(&$form, &$form_state, $form_id) {
 function leaguerunner_node_insert($node) {
   if(!empty($node->status) && !empty($node->leaguerunner) && !empty($node->leaguerunner['post'])) {
 
-    // Create Queue for batch mail
-    $queue = DrupalQueue::get('leaguerunner_queue_notify');
-
     // pull body text from node and parse out summary if it exists
     $body = array_shift(field_get_items('node', $node, 'body'));
     $summary = empty($body['summary']) ? text_summary($body['value'], NULL, 160) : $body['summary'];
@@ -153,20 +150,23 @@ function leaguerunner_node_insert($node) {
     $from = variable_get('site_mail','Leaguerunner');
 
     db_set_active('leaguerunner');
-    $records = db_query("SELECT email FROM {person} WHERE class='player' ");
+    $records = db_query("SELECT email FROM {person} WHERE class='player' AND status='active'");
     db_set_active();
 
-    foreach($records as $person) {
-      // Gather params for mail
-      $params = array(
-        'to'=> $person->email,
-        'from' => $from,
-        'subject' => $node->title,
-        'message' => $summary,
-      );
-      // Add to the queue.  Messages will be sent with next cron run
-      $queue->createItem($params);
-    }
+    $params = array(
+      'to' => 'sudburyultimate@gmail.com',
+      'from' => $from,
+      'subject' => $node->title,
+      'message' => $summary,
+    );
+    $params['headers']['bcc']='sudburyultimate@gmail.com';
+
+    // Gather email addresses for bcc listing
+    foreach($records as $person)
+      $params['headers']['bcc'] .= $person->email;
+
+    // All addresses collected, send message
+    drupal_mail('leaguerunner', 'notify', $params['to'], language_default(), $params, $params['from'], false);
   }
 }
 
